@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import authService from './authService'
 
 
-//createSlice : methode d'assistance qui simplifie le processus de creation d'actions et de reducteurs
+//createSlice : methode d'assistance qui simplifie le processus de creation d'actions et de reducer
 //createAsyncThunk : ecrit la logique asynchrone
 
 //const token = localStorage.getItem("token") ? localStorage.getItem('token') : null
