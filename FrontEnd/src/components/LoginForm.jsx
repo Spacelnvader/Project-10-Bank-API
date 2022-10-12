@@ -70,7 +70,8 @@ const LoginForm = () => {
                     <label htmlFor="remember-me" >Remember me</label>
                 </div>
                 <button className="signInButton" type="submit">Sign In</button>
-                {isLoading && <><div className='error'>Utilisateur inexistant</div><Loader /></>}
+                {isError && <div className='error'>Utilisateur inexistant</div>}
+                {isLoading && <Loader />}
             </form>
         </>
     );

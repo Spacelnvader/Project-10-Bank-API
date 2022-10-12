@@ -3,7 +3,7 @@ import authService from './authService'
 
 
 //createSlice : methode d'assistance qui simplifie le processus de creation d'actions et de reducer
-//createAsyncThunk : ecrit la logique asynchrone
+//createAsyncThunk : permet les requetes asynchrones intéragissants avec le store
 
 //const token = localStorage.getItem("token") ? localStorage.getItem('token') : null
 
@@ -24,12 +24,15 @@ export const login = createAsyncThunk('auth/login', async (formData, thunkAPI) =
         //console.log(formData)//ici on récupère l'email et le password
         return await authService.login(formData)
 
+
     } catch (error) {
         const message =
             (error.response && error.response.data && error.response.data.message) ||
             error.message ||
             error.toString()
+            //console.log('error',thunkAPI)
         return thunkAPI.rejectWithValue(message)
+        
     }
 })
 

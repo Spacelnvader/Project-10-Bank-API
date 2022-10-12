@@ -15,7 +15,9 @@ const login = async (formData) => {
             if (res.data) { localStorage.setItem("token", res.data.body.token) }
             return res.data
         })
+
         .catch((error) => console.log(error))
+        
 }
 
 

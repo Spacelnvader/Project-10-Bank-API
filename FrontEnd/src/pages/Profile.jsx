@@ -101,7 +101,7 @@ const Profile = () => {
             />
             <AccountItem
                 editBackground={editBackground}
-                title="Argent Bank Savings (x6712)"
+                title="Argent Bank Savings (x67124)"
                 amount="$10,928.42"
                 description="Available Balance"
             />
