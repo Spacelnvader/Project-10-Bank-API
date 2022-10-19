@@ -9,14 +9,20 @@ const API_URL = 'http://localhost:3001/api/v1/user/'
 
 // Login user : get datas from backend
 const login = async (formData) => {
-    return await axios.post(API_URL + 'login', formData)
-        .then((res) => {
+    try {
+    const res = await axios.post(API_URL + 'login', formData)
+        
             //console.log(res.data.body.token)
             if (res.data) { localStorage.setItem("token", res.data.body.token) }
             return res.data
-        })
+        
+    }
 
-        .catch((error) => console.log(error))
+    catch(error){
+
+        console.log(error)
+        throw new Error(error)
+    }
         
 }
 

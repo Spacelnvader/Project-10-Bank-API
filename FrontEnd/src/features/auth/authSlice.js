@@ -4,6 +4,7 @@ import authService from './authService'
 
 //createSlice : methode d'assistance qui simplifie le processus de creation d'actions et de reducer
 //createAsyncThunk : permet les requetes asynchrones intéragissants avec le store
+//thunkAPi : action creator, contient des paramètres comme 'getstate, dispatch, rejectwithvalue'
 
 //const token = localStorage.getItem("token") ? localStorage.getItem('token') : null
 
@@ -105,6 +106,7 @@ export const authSlice = createSlice({
                 state.isLoading = false
                 state.isError = true
                 state.message = payload
+                
             })
 
             //logout
