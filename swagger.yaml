@@ -59,7 +59,7 @@ paths:
         '500':
           description: Internal Server Error
   /user/profile:
-    post:
+    get:
       security:
         - Bearer: []
       tags:
@@ -114,20 +114,20 @@ paths:
         '500':
           description: Internal Server Error
 
-  /accounts{id}:
+  /accounts/{id}:
     get:
       security:
         - Bearer: []
       tags:
         - Transactions module
       summary: User Accounts API
-      description: API for fetching user accounts
+      description: API for fetching user accounts by ID
       parameters:
-        - in: header
-          name: Authorization
-          description: Attach Bearer JWT token
+        - in: path
+          name: id
           required: true
-          type: string
+          type: integer
+          description: The user ID
       produces:
         - application/json
       responses:
@@ -139,20 +139,20 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
-  /account{id}/transactions:
+  /account/{id}/transactions:
     get:
       security:
         - Bearer: []
       tags:
         - Transactions module
       summary: Transactions API
-      description: API for fetching transactions
+      description: API for fetching transactions by userID
       parameters:
-        - in: header
-          name: Authorization
-          description: Attach Bearer JWT token
+        - in: path
+          name: id
           required: true
-          type: string
+          type: integer
+          description: The user ID
       produces:
         - application/json
       responses:
@@ -165,20 +165,20 @@ paths:
         '500':
           description: Internal Server Error
     
-  /account{id}/transactions/transaction{id}:
-    patch:
+  /account/{id}/transactions/{transactionId}:
+    put:
       security:
         - Bearer: []
       tags:
         - Transactions module
       summary: Transactions API
-      description: Update a transaction's description
+      description: Update a transaction's description or category
       parameters:
-        - in: header
-          name: Authorization
-          description: Attach Bearer JWT token
+        - in: path
+          name: id
           required: true
-          type: string
+          type: integer
+          description: The user ID
         - in: path
           name: transactionId
           type: number
@@ -272,7 +272,7 @@ definitions:
               type: string
               example: ABchecking123
             name:
-              type: 
+              type: string
               example: ArgentBank checking
             balance:
               type: number
