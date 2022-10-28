@@ -114,45 +114,20 @@ paths:
         '500':
           description: Internal Server Error
 
-  /accounts/{id}:
-    get:
-      security:
-        - Bearer: []
-      tags:
-        - Transactions module
-      summary: User Accounts API
-      description: API for fetching user accounts by ID
-      parameters:
-        - in: path
-          name: id
-          required: true
-          type: integer
-          description: The user ID
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: User accounts retrieved successully
-          schema:
-            $ref: '#/definitions/UserAccounts'
-        '400':
-          description: Invalid Fields
-        '500':
-          description: Internal Server Error
-  /account/{id}/transactions:
-    get:
+  /accounts/{accountid}:
+   get:
       security:
         - Bearer: []
       tags:
         - Transactions module
       summary: Transactions API
-      description: API for fetching transactions by userID
+      description: API for fetching transactions by account ID.return all transactions for a specific account.
       parameters:
         - in: path
-          name: id
+          name: accountid
           required: true
           type: integer
-          description: The user ID
+          description: The account ID
       produces:
         - application/json
       responses:
@@ -161,24 +136,27 @@ paths:
           schema:
             $ref: '#/definitions/ApiTransactionsResponse'
         '400':
-          description: Transactions not found
+          description: Bad request
+        '404':
+          description: Account not found
         '500':
           description: Internal Server Error
     
-  /account/{id}/transactions/{transactionId}:
+  
+  /accounts/{accountid}/transactions/{transactionId}:
     put:
       security:
         - Bearer: []
       tags:
         - Transactions module
       summary: Transactions API
-      description: Update a transaction's description or category
+      description: Update and return a transaction's description or category based on its ID
       parameters:
         - in: path
-          name: id
+          name: accountid
           required: true
           type: integer
-          description: The user ID
+          description: The account ID
         - in: path
           name: transactionId
           type: number
@@ -198,6 +176,8 @@ paths:
             $ref: '#/definitions/ApiTransactionsResponse'
         '400':
           description: Invalid Fields
+        '404':
+          description: Transaction not found
         '500':
           description: Internal Server Error
 
@@ -259,52 +239,36 @@ definitions:
         type: string
       lastName:
         type: string
-
-  UserAccounts:
-    type: object
-    properties:
-      accounts:
-        type: array
-        items:
-          type: object
-          properties:
-            accountId:
-              type: string
-              example: ABchecking123
-            name:
-              type: string
-              example: ArgentBank checking
-            balance:
-              type: number
-            description:
-              type: string   
   Transaction:
-    type: object
-    properties:
-      id:
-        type: string
-        description: transaction ID
-      date:
-        type: string
-        description: transaction date
-      description:
-        type: string
-        description: transaction description
-      amount:
-        type: number
-        description: transaction amount
-      balance:
-        type: number
-        description: account balance after transaction
-      transactionType:
-        type: string
-        description: transaction type
-      category:
-        type: string
-        description: transaction category
-      note:
-        type: string
-        description: user's notes for transaction
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+          description: transaction ID
+        date:
+          type: string
+          description: transaction date
+        description:
+          type: string
+          description: transaction description
+        amount:
+          type: number
+          description: transaction amount
+        balance:
+          type: number
+          description: account balance after transaction
+        transactionType:
+          type: string
+          description: transaction type
+        category:
+          type: string
+          description: transaction category
+        notes:
+          type: string
+          description: user's notes for transaction
+          
   ApiTransactionsResponse:
     type: object
     properties:
